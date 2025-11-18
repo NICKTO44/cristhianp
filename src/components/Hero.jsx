@@ -248,7 +248,7 @@ const Hero = () => {
                 <div className="w-full h-full rounded-full bg-gradient-to-br from-primary-gray to-primary-gray-light flex items-center justify-center overflow-hidden border-2 border-primary-green/30">
                   {/* Placeholder para imagen - Reemplaza con tu imagen real */}
                   <img
-                    src="/assets/images/avatar1.png"
+                    src={`${import.meta.env.BASE_URL}assets/images/avatar1.png`}
                     alt="Cristhian Quispe"
                     className="w-full h-full object-cover"
                     onError={(e) => {
