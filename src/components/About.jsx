@@ -103,7 +103,7 @@ const About = () => {
               <div className="relative glass-strong rounded-2xl overflow-hidden p-2">
                 <div className="aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-primary-gray to-primary-gray-light">
                   <img
-                   src={`${import.meta.env.BASE_URL}assets/images/avatar1.png`}
+                   src={`${import.meta.env.BASE_URL}assets/images/perfil.jpg`}
                     alt="Cristhian Quispe - Desarrollador Web"
                     className="w-full h-full object-cover"
                     onError={(e) => {

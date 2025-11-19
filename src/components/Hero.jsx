@@ -248,7 +248,7 @@ const Hero = () => {
                 <div className="w-full h-full rounded-full bg-gradient-to-br from-primary-gray to-primary-gray-light flex items-center justify-center overflow-hidden border-2 border-primary-green/30">
                   {/* Imagen centrada */}
                   <img
-                    src={`${import.meta.env.BASE_URL}assets/images/avatar1.png`}
+                    src={`${import.meta.env.BASE_URL}assets/images/perfil.jpg`}
                     alt="Cristhian Quispe"
                     className="w-full h-full object-cover object-center"
                     onError={(e) => {
