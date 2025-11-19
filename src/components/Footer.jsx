@@ -159,10 +159,10 @@ const Footer = () => {
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="mailto:cristhian.quispe@ejemplo.com"
+                    href="cristhianquispechallco44@gmail.com"
                     className="text-primary-white/70 hover:text-primary-green transition-colors cursor-hover block"
                   >
-                    cristhianquispe@gmail.com
+                    cristhianquispechallco44@gmail.com
                   </a>
                 </li>
                 <li>

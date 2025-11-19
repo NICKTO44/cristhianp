@@ -56,7 +56,7 @@ const Contact = () => {
     {
       icon: <FaEnvelope />,
       title: 'Email',
-      value: 'cristhianquispe@gmail.com',
+      value: 'cristhianquispechallco44@gmail.com',
       link: 'mailto:cristhian.quispe@ejemplo.com',
     },
     {
@@ -77,7 +77,7 @@ const Contact = () => {
     {
       icon: <FaGithub />,
       name: 'GitHub',
-      url: 'https://github.com/tuusuario',
+      url: 'https://github.com/NICKTO44',
       color: '#FFFFFF',
     },
     {

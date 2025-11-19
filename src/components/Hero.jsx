@@ -243,23 +243,62 @@ const Hero = () => {
                 className="absolute inset-0 rounded-full bg-gradient-to-br from-primary-green/30 to-transparent blur-2xl"
               />
 
-              {/* Avatar / Ilustración */}
+              {/* Avatar / Ilustración - MEJORADO CENTRADO */}
               <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full glass p-2">
                 <div className="w-full h-full rounded-full bg-gradient-to-br from-primary-gray to-primary-gray-light flex items-center justify-center overflow-hidden border-2 border-primary-green/30">
-                  {/* Placeholder para imagen - Reemplaza con tu imagen real */}
+                  {/* Imagen centrada */}
                   <img
                     src={`${import.meta.env.BASE_URL}assets/images/avatar1.png`}
                     alt="Cristhian Quispe"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
-                  {/* Fallback si no hay imagen */}
-                  <div className="w-full h-full flex items-center justify-center text-8xl font-bold text-primary-green">
-                    CQ
-                  </div>
+                  {/* Fallback con efecto GLOW RADIANTE */}
+                  <motion.div 
+                    className="w-full h-full flex items-center justify-center text-8xl font-bold relative"
+                    style={{ display: 'none' }}
+                    animate={{
+                      textShadow: [
+                        '0 0 20px rgba(34, 197, 94, 0.8), 0 0 40px rgba(34, 197, 94, 0.6), 0 0 60px rgba(34, 197, 94, 0.4)',
+                        '0 0 30px rgba(34, 197, 94, 1), 0 0 60px rgba(34, 197, 94, 0.8), 0 0 90px rgba(34, 197, 94, 0.6)',
+                        '0 0 20px rgba(34, 197, 94, 0.8), 0 0 40px rgba(34, 197, 94, 0.6), 0 0 60px rgba(34, 197, 94, 0.4)',
+                      ],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  >
+                    {/* Glow adicional detrás de la C */}
+                    <motion.div
+                      className="absolute inset-0 flex items-center justify-center"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.3, 0.6, 0.3],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                    >
+                      <div className="w-40 h-40 bg-primary-green rounded-full blur-3xl" />
+                    </motion.div>
+                    
+                    {/* Letra C con gradiente y glow */}
+                    <span 
+                      className="relative z-10 text-transparent bg-clip-text bg-gradient-to-br from-primary-green via-green-400 to-primary-green"
+                      style={{
+                        filter: 'drop-shadow(0 0 10px rgba(34, 197, 94, 0.8))',
+                      }}
+                    >
+                      C
+                    </span>
+                  </motion.div>
                 </div>
               </div>
 

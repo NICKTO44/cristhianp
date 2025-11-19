@@ -22,10 +22,10 @@ export const projectsData = [
   {
     id: 3,
     title: 'Weather Dashboard',
-    description: 'Dashboard meteorológico interactivo que consume APIs para mostrar pronósticos, mapas climáticos y alertas en tiempo real con visualizaciones dinámicas.',
-    image: 'assets/images/proximo.png',
+    description: 'landing page moderna y funcional que muestra el catalogo de zapatos , con su propio dashboard, ',
+    image: 'assets/images/danielastore.png',
     technologies: ['React', 'JavaScript', 'CSS', 'API REST'],
-    demoUrl: 'https://demo-proyecto3.com',
+    demoUrl: 'https://danielastore.site/',
     githubUrl: 'https://github.com/tuusuario/proyecto3',
     featured: false,
   },
