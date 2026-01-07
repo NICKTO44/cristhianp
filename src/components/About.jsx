@@ -2,10 +2,12 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaCode, FaRocket, FaLightbulb, FaGraduationCap } from 'react-icons/fa';
+import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const { isLiteMode } = usePerformanceMode();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -69,19 +71,23 @@ const About = () => {
       ref={ref}
       className="relative py-20 md:py-32 bg-gradient-to-b from-primary-black via-primary-gray/30 to-primary-black overflow-hidden"
     >
-      {/* Decorative elements */}
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute top-20 right-10 w-72 h-72 bg-primary-green/20 rounded-full blur-[100px]"
-      />
+      {/* Decorative elements - MODO COMPLETO: animado, MODO LITE: estático */}
+      {isLiteMode ? (
+        <div className="absolute top-20 right-10 w-72 h-72 bg-primary-green/10 rounded-full" />
+      ) : (
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-20 right-10 w-72 h-72 bg-primary-green/20 rounded-full blur-[100px]"
+        />
+      )}
 
       <div className="container-custom relative z-10">
         <motion.div
@@ -93,14 +99,20 @@ const About = () => {
           {/* Imagen/Avatar */}
           <motion.div variants={itemVariants} className="relative">
             <motion.div
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: isLiteMode ? 1 : 1.02 }}
               className="relative group"
             >
-              {/* Glow effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary-green to-green-400 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500" />
+              {/* Glow effect - Solo en modo completo */}
+              {!isLiteMode && (
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary-green to-green-400 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500" />
+              )}
 
               {/* Image container */}
-              <div className="relative glass-strong rounded-2xl overflow-hidden p-2">
+              <div className={`relative rounded-2xl overflow-hidden p-2 ${
+                isLiteMode 
+                  ? 'bg-primary-gray-light/50 border border-primary-green/30'
+                  : 'glass-strong'
+              }`}>
                 <div className="aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-primary-gray to-primary-gray-light">
                   <img
                    src={`${import.meta.env.BASE_URL}assets/images/perfil.jpg`}
@@ -121,9 +133,9 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Floating badge */}
+              {/* Floating badge - Animación reducida en modo lite */}
               <motion.div
-                animate={{
+                animate={isLiteMode ? {} : {
                   y: [0, -10, 0],
                 }}
                 transition={{
@@ -131,7 +143,11 @@ const About = () => {
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-                className="absolute -bottom-6 -right-6 glass-strong rounded-2xl p-4 border border-primary-green/30"
+                className={`absolute -bottom-6 -right-6 rounded-2xl p-4 border border-primary-green/30 ${
+                  isLiteMode
+                    ? 'bg-primary-gray-light/90'
+                    : 'glass-strong'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 bg-primary-green rounded-full animate-pulse" />
@@ -192,8 +208,12 @@ const About = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  className="glass-strong rounded-xl p-5 border border-primary-green/20 hover:border-primary-green/50 transition-all duration-300 cursor-hover group"
+                  whileHover={{ scale: isLiteMode ? 1 : 1.02, y: isLiteMode ? 0 : -5 }}
+                  className={`rounded-xl p-5 border border-primary-green/20 hover:border-primary-green/50 transition-all duration-300 cursor-hover group ${
+                    isLiteMode
+                      ? 'bg-primary-gray-light/50'
+                      : 'glass-strong'
+                  }`}
                 >
                   <div className="flex items-start gap-4">
                     <div className="text-3xl text-primary-green group-hover:scale-110 transition-transform duration-300">

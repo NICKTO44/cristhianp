@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaWhatsapp, FaHeart, FaArrowUp } from 'react-icons/fa';
+import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { isLiteMode } = usePerformanceMode();
 
   const socialLinks = [
     {
@@ -57,18 +59,23 @@ const Footer = () => {
 
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary-green/50 to-transparent" />
 
-      <motion.div
-        animate={{
-          opacity: [0.1, 0.2, 0.1],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-green/10 rounded-full blur-[100px]"
-      />
+      {/* Decorative gradient - MODO COMPLETO: animado, MODO LITE: estático */}
+      {isLiteMode ? (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-green/5 rounded-full" />
+      ) : (
+        <motion.div
+          animate={{
+            opacity: [0.1, 0.2, 0.1],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-green/10 rounded-full blur-[100px]"
+        />
+      )}
 
       <div className="container-custom relative z-10">
         <div className="py-12 md:py-16">
@@ -105,7 +112,9 @@ const Footer = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, y: -3 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-10 h-10 flex items-center justify-center glass rounded-lg border border-primary-green/30 hover:border-primary-green/50 transition-all cursor-hover group"
+                      className={`w-10 h-10 flex items-center justify-center rounded-lg border border-primary-green/30 hover:border-primary-green/50 transition-all cursor-hover group ${
+                        isLiteMode ? 'bg-primary-gray' : 'glass'
+                      }`}
                       aria-label={social.name}
                     >
                       <span className="text-xl text-primary-white group-hover:text-primary-green transition-colors">
@@ -159,7 +168,7 @@ const Footer = () => {
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="cristhianquispechallco44@gmail.com"
+                    href="mailto:cristhianquispechallco44@gmail.com"
                     className="text-primary-white/70 hover:text-primary-green transition-colors cursor-hover block"
                   >
                     cristhianquispechallco44@gmail.com
@@ -181,12 +190,16 @@ const Footer = () => {
               </ul>
 
               <motion.div
-                animate={{ scale: [1, 1.02, 1] }}
+                animate={isLiteMode ? {} : { scale: [1, 1.02, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="mt-6 inline-flex items-center gap-2 px-4 py-2 glass-strong rounded-full border border-primary-green/30"
+                className={`mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary-green/30 ${
+                  isLiteMode
+                    ? 'bg-primary-gray-light/50'
+                    : 'glass-strong'
+                }`}
               >
                 <motion.div
-                  animate={{ scale: [1, 1.3, 1] }}
+                  animate={isLiteMode ? {} : { scale: [1, 1.3, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                   className="w-2 h-2 bg-primary-green rounded-full"
                 />
@@ -219,7 +232,7 @@ const Footer = () => {
             >
               <span>Hecho con</span>
               <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
+                animate={isLiteMode ? {} : { scale: [1, 1.2, 1] }}
                 transition={{
                   duration: 1,
                   repeat: Infinity,
@@ -235,7 +248,9 @@ const Footer = () => {
               onClick={scrollToTop}
               whileHover={{ scale: 1.1, y: -3 }}
               whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 flex items-center justify-center glass rounded-lg border border-primary-green/30 hover:border-primary-green/50 transition-all cursor-hover group"
+              className={`w-10 h-10 flex items-center justify-center rounded-lg border border-primary-green/30 hover:border-primary-green/50 transition-all cursor-hover group ${
+                isLiteMode ? 'bg-primary-gray' : 'glass'
+              }`}
               aria-label="Volver arriba"
             >
               <FaArrowUp className="text-primary-white group-hover:text-primary-green transition-colors" />

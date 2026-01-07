@@ -15,10 +15,12 @@ import {
   SiExpress,
   SiMysql,
 } from 'react-icons/si';
+import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const Skills = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const { isLiteMode } = usePerformanceMode();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -45,7 +47,7 @@ const Skills = () => {
   const skillCategories = [
     {
       title: 'Frontend Development',
-      icon: '🎨',
+      
       description: 'Creación de interfaces modernas y responsive',
       skills: [
         { name: 'React', icon: <FaReact />, level: 85, color: '#61DAFB' },
@@ -58,7 +60,7 @@ const Skills = () => {
     },
     {
       title: 'Backend Development',
-      icon: '⚙️',
+      
       description: 'Desarrollo de APIs y lógica del servidor',
       skills: [
         { name: 'Node.js', icon: <FaNodeJs />, level: 80, color: '#339933' },
@@ -68,12 +70,12 @@ const Skills = () => {
     },
     {
       title: 'Database & Tools',
-      icon: '🗄️',
+     
       description: 'Gestión de bases de datos y herramientas',
       skills: [
         { name: 'MySQL', icon: <SiMysql />, level: 80, color: '#4479A1' },
-        { name: 'Git', icon: '🔀', level: 85, color: '#F05032' },
-        { name: 'GitHub', icon: '🐙', level: 85, color: '#FFFFFF' },
+        { name: 'Git', icon: <FaDatabase />, level: 85, color: '#F05032' },
+        { name: 'GitHub', icon: <FaDatabase />, level: 85, color: '#FFFFFF' },
       ],
     },
   ];
@@ -93,19 +95,23 @@ const Skills = () => {
       ref={ref}
       className="relative py-20 md:py-32 bg-gradient-to-b from-primary-black via-primary-gray/30 to-primary-black overflow-hidden"
     >
-      {/* Decorative elements */}
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.3, 0.2],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary-green/20 rounded-full blur-[120px]"
-      />
+      {/* Decorative elements - MODO COMPLETO: animado, MODO LITE: estático */}
+      {isLiteMode ? (
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary-green/10 rounded-full" />
+      ) : (
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.3, 0.2],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary-green/20 rounded-full blur-[120px]"
+        />
+      )}
 
       <div className="container-custom relative z-10">
         {/* Header */}
@@ -140,13 +146,17 @@ const Skills = () => {
             <motion.div
               key={categoryIndex}
               variants={itemVariants}
-              whileHover={{ y: -10 }}
-              className="glass-strong rounded-2xl p-8 border border-primary-green/20 hover:border-primary-green/50 transition-all duration-300 group cursor-hover"
+              whileHover={{ y: isLiteMode ? 0 : -10 }}
+              className={`rounded-2xl p-8 border border-primary-green/20 hover:border-primary-green/50 transition-all duration-300 group cursor-hover ${
+                isLiteMode
+                  ? 'bg-primary-gray-light/50'
+                  : 'glass-strong'
+              }`}
             >
               {/* Category Header */}
               <div className="text-center mb-8">
                 <motion.div
-                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  whileHover={isLiteMode ? {} : { rotate: 360, scale: 1.2 }}
                   transition={{ duration: 0.6 }}
                   className="text-5xl mb-4 inline-block"
                 >
@@ -194,7 +204,7 @@ const Skills = () => {
                         animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
                         transition={{ duration: 1, delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.3 }}
                         className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary-green to-green-400 rounded-full"
-                        style={{
+                        style={isLiteMode ? {} : {
                           boxShadow: '0 0 10px rgba(34, 197, 94, 0.5)',
                         }}
                       />
@@ -211,7 +221,11 @@ const Skills = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="glass-strong rounded-2xl p-8 border border-primary-green/20"
+          className={`rounded-2xl p-8 border border-primary-green/20 ${
+            isLiteMode
+              ? 'bg-primary-gray-light/50'
+              : 'glass-strong'
+          }`}
         >
           <div className="text-center mb-8">
             <h3 className="text-3xl font-display font-bold text-primary-white mb-2">
@@ -230,11 +244,11 @@ const Skills = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                 transition={{ delay: 1 + index * 0.1 }}
-                whileHover={{ scale: 1.1, y: -5 }}
+                whileHover={{ scale: isLiteMode ? 1.05 : 1.1, y: isLiteMode ? 0 : -5 }}
                 className="flex flex-col items-center text-center p-4 bg-primary-gray-light rounded-xl border border-primary-green/20 hover:border-primary-green/50 transition-all cursor-hover group"
               >
                 <motion.div
-                  whileHover={{ rotate: 360 }}
+                  whileHover={isLiteMode ? {} : { rotate: 360 }}
                   transition={{ duration: 0.5 }}
                   className="text-4xl mb-3"
                 >
@@ -255,9 +269,13 @@ const Skills = () => {
           transition={{ duration: 0.6, delay: 1.2 }}
           className="mt-12 text-center"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 glass-strong rounded-full border border-primary-green/30">
+          <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-full border border-primary-green/30 ${
+            isLiteMode
+              ? 'bg-primary-gray-light/50'
+              : 'glass-strong'
+          }`}>
             <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
+              animate={isLiteMode ? {} : { scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
               className="w-3 h-3 bg-primary-green rounded-full"
             />

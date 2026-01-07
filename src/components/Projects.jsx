@@ -4,10 +4,13 @@ import { useRef, useState } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import ProjectCard from './ProjectCard';
 import { projectsData } from '../data/projects';
+import usePerformanceMode from '../hooks/usePerformanceMode';
+
 const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [filter, setFilter] = useState('all');
+  const { isLiteMode } = usePerformanceMode();
 
   const filteredProjects =
     filter === 'all'
@@ -25,19 +28,23 @@ const Projects = () => {
       {/* Grid background */}
       <div className="absolute inset-0 grid-background opacity-30" />
 
-      {/* Decorative gradient */}
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.3, 0.2],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-green/20 rounded-full blur-[120px]"
-      />
+      {/* Decorative gradient - MODO COMPLETO: animado, MODO LITE: estático */}
+      {isLiteMode ? (
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-green/10 rounded-full" />
+      ) : (
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.3, 0.2],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-green/20 rounded-full blur-[120px]"
+        />
+      )}
 
       <div className="container-custom relative z-10">
         {/* Header */}

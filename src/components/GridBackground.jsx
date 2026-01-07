@@ -1,10 +1,15 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const GridBackground = () => {
   const canvasRef = useRef(null);
+  const { isLiteMode } = usePerformanceMode();
 
   useEffect(() => {
+    // Si estamos en modo LITE, no ejecutar el canvas animado
+    if (isLiteMode) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -117,8 +122,44 @@ const GridBackground = () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isLiteMode]);
 
+  // MODO LITE: Solo CSS, sin canvas
+  if (isLiteMode) {
+    return (
+      <>
+        {/* Grid estático con CSS */}
+        <div 
+          className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-30"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(34, 197, 94, 0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(34, 197, 94, 0.05) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+          }}
+        />
+
+        {/* Gradiente radial verde estático */}
+        <div
+          className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.08) 0%, transparent 50%)',
+          }}
+        />
+
+        {/* Textura de ruido sutil */}
+        <div
+          className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
+          }}
+        />
+      </>
+    );
+  }
+
+  // MODO COMPLETO: Canvas animado + todos los efectos
   return (
     <>
       {/* Canvas animado */}

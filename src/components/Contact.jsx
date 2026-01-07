@@ -10,11 +10,13 @@ import {
   FaPaperPlane,
 } from 'react-icons/fa';
 import emailjs from 'emailjs-com';
+import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const formRef = useRef();
+  const { isLiteMode } = usePerformanceMode();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -170,18 +172,23 @@ const Contact = () => {
     >
       <div className="absolute inset-0 grid-background opacity-30" />
 
-      <motion.div
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-green/20 rounded-full blur-[120px]"
-      />
+      {/* Decorative gradient - MODO COMPLETO: animado, MODO LITE: estático */}
+      {isLiteMode ? (
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-green/10 rounded-full" />
+      ) : (
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-green/20 rounded-full blur-[120px]"
+        />
+      )}
 
       <div className="container-custom relative z-10">
         <motion.div
@@ -216,8 +223,12 @@ const Contact = () => {
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={index}
-                  whileHover={{ x: 10 }}
-                  className="glass-strong rounded-xl p-6 border border-primary-green/20 hover:border-primary-green/50 transition-all duration-300 cursor-hover group"
+                  whileHover={{ x: isLiteMode ? 0 : 10 }}
+                  className={`rounded-xl p-6 border border-primary-green/20 hover:border-primary-green/50 transition-all duration-300 cursor-hover group ${
+                    isLiteMode
+                      ? 'bg-primary-gray-light/50'
+                      : 'glass-strong'
+                  }`}
                 >
                   {info.link ? (
                     <a
@@ -258,7 +269,11 @@ const Contact = () => {
             </div>
 
             {/* Social Links */}
-            <div className="glass-strong rounded-xl p-6 border border-primary-green/20">
+            <div className={`rounded-xl p-6 border border-primary-green/20 ${
+              isLiteMode
+                ? 'bg-primary-gray-light/50'
+                : 'glass-strong'
+            }`}>
               <h3 className="text-xl font-display font-bold text-primary-white mb-4">
                 Sígueme en redes
               </h3>
@@ -271,7 +286,9 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, y: -5 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-14 h-14 flex items-center justify-center glass rounded-xl border border-primary-green/30 hover:border-primary-green/50 transition-all cursor-hover group"
+                    className={`w-14 h-14 flex items-center justify-center rounded-xl border border-primary-green/30 hover:border-primary-green/50 transition-all cursor-hover group ${
+                      isLiteMode ? 'bg-primary-gray' : 'glass'
+                    }`}
                   >
                     <span
                       className="text-2xl transition-colors"
@@ -285,13 +302,17 @@ const Contact = () => {
             </div>
 
             <motion.div
-              animate={{ scale: [1, 1.02, 1] }}
+              animate={isLiteMode ? {} : { scale: [1, 1.02, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="glass-strong rounded-xl p-6 border border-primary-green/50"
+              className={`rounded-xl p-6 border border-primary-green/50 ${
+                isLiteMode
+                  ? 'bg-primary-gray-light/50'
+                  : 'glass-strong'
+              }`}
             >
               <div className="flex items-center gap-3 mb-3">
                 <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
+                  animate={isLiteMode ? {} : { scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                   className="w-3 h-3 bg-primary-green rounded-full"
                 />
@@ -311,7 +332,11 @@ const Contact = () => {
             <form
               ref={formRef}
               onSubmit={handleSubmit}
-              className="glass-strong rounded-2xl p-8 border border-primary-green/20 space-y-6"
+              className={`rounded-2xl p-8 border border-primary-green/20 space-y-6 ${
+                isLiteMode
+                  ? 'bg-primary-gray-light/50'
+                  : 'glass-strong'
+              }`}
             >
               {/* Name Field */}
               <div>

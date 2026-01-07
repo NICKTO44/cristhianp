@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiMenu, HiX } from 'react-icons/hi';
+import PerformanceToggle from './PerformanceToggle';
+import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
+  const { isLiteMode } = usePerformanceMode();
 
-  // Detectar scroll para efecto glassmorphism
+  // Detectar scroll (glassmorphism)
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -30,7 +33,10 @@ const Header = () => {
           const offsetTop = element.offsetTop;
           const offsetHeight = element.offsetHeight;
 
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
             setActiveSection(section);
             break;
           }
@@ -68,7 +74,11 @@ const Header = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'glass-strong shadow-lg' : 'bg-transparent'
+        isScrolled
+          ? isLiteMode
+            ? 'bg-primary-black/95 shadow-lg'
+            : 'glass-strong shadow-lg'
+          : 'bg-transparent'
       }`}
     >
       <nav className="container-custom">
@@ -117,15 +127,19 @@ const Header = () => {
                   <motion.div
                     layoutId="activeSection"
                     className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-green"
-                    style={{ boxShadow: '0 0 10px rgba(34, 197, 94, 0.6)' }}
+                    style={{
+                      boxShadow: '0 0 10px rgba(34, 197, 94, 0.6)',
+                    }}
                   />
                 )}
               </motion.a>
             ))}
           </div>
 
-          {/* Social Icons Desktop */}
+          {/* Social + Performance Toggle Desktop */}
           <div className="hidden md:flex items-center space-x-4">
+            <PerformanceToggle />
+
             <motion.a
               href="https://github.com/NICKTO44"
               target="_blank"
@@ -137,6 +151,7 @@ const Header = () => {
             >
               <FaGithub size={22} />
             </motion.a>
+
             <motion.a
               href="https://linkedin.com/in/tuusuario"
               target="_blank"
@@ -169,7 +184,9 @@ const Header = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden glass-strong rounded-b-2xl"
+              className={`md:hidden overflow-hidden rounded-b-2xl ${
+                isLiteMode ? 'bg-primary-black/95' : 'glass-strong'
+              }`}
             >
               <div className="flex flex-col space-y-4 py-6 px-4">
                 {navItems.map((item, index) => (
@@ -193,7 +210,10 @@ const Header = () => {
                   </motion.a>
                 ))}
 
-                {/* Social Icons Mobile */}
+                <div className="pt-4 border-t border-primary-gray-light">
+                  <PerformanceToggle />
+                </div>
+
                 <div className="flex items-center space-x-6 pt-4 border-t border-primary-gray-light">
                   <motion.a
                     href="https://github.com/NICKTO44"
@@ -205,6 +225,7 @@ const Header = () => {
                   >
                     <FaGithub size={24} />
                   </motion.a>
+
                   <motion.a
                     href="https://linkedin.com/in/tuusuario"
                     target="_blank"

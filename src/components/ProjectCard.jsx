@@ -1,21 +1,30 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const ProjectCard = ({ project, index }) => {
+  const { isLiteMode } = usePerformanceMode();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -10 }}
+      whileHover={{ y: isLiteMode ? 0 : -10 }}
       className="group relative h-full cursor-hover"
     >
-      {/* Glow effect */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-primary-green to-green-400 rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition duration-500" />
+      {/* Glow effect - Solo en modo completo */}
+      {!isLiteMode && (
+        <div className="absolute -inset-1 bg-gradient-to-r from-primary-green to-green-400 rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition duration-500" />
+      )}
 
       {/* Card */}
-      <div className="relative h-full glass-strong rounded-2xl overflow-hidden border border-primary-green/20 group-hover:border-primary-green/50 transition-all duration-300">
+      <div className={`relative h-full rounded-2xl overflow-hidden border border-primary-green/20 group-hover:border-primary-green/50 transition-all duration-300 ${
+        isLiteMode
+          ? 'bg-primary-gray-light/50'
+          : 'glass-strong'
+      }`}>
 
         {/* Image container */}
         <div className="relative h-56 overflow-hidden bg-primary-gray">
@@ -128,22 +137,24 @@ const ProjectCard = ({ project, index }) => {
           </div>
         </div>
 
-        {/* Shine effect */}
-        <motion.div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{
-            background:
-              'linear-gradient(45deg, transparent 30%, rgba(34, 197, 94, 0.1) 50%, transparent 70%)',
-            backgroundSize: '200% 200%',
-          }}
-          animate={{
-            backgroundPosition: ['0% 0%', '200% 200%'],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-          }}
-        />
+        {/* Shine effect - Solo en modo completo */}
+        {!isLiteMode && (
+          <motion.div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={{
+              background:
+                'linear-gradient(45deg, transparent 30%, rgba(34, 197, 94, 0.1) 50%, transparent 70%)',
+              backgroundSize: '200% 200%',
+            }}
+            animate={{
+              backgroundPosition: ['0% 0%', '200% 200%'],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+            }}
+          />
+        )}
       </div>
     </motion.div>
   );

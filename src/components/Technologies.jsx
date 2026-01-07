@@ -17,10 +17,12 @@ import {
   SiMysql,
   SiVite,
 } from 'react-icons/si';
+import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const Technologies = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const { isLiteMode } = usePerformanceMode();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -129,19 +131,23 @@ const Technologies = () => {
       {/* Grid background pattern */}
       <div className="absolute inset-0 grid-background opacity-50" />
 
-      {/* Decorative gradient */}
-      <motion.div
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-green/20 rounded-full blur-[150px]"
-      />
+      {/* Decorative gradient - MODO COMPLETO: animado, MODO LITE: estático */}
+      {isLiteMode ? (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-green/10 rounded-full" />
+      ) : (
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-green/20 rounded-full blur-[150px]"
+        />
+      )}
 
       <div className="container-custom relative z-10">
         {/* Header */}
@@ -178,30 +184,36 @@ const Technologies = () => {
               key={index}
               variants={itemVariants}
               whileHover={{
-                scale: 1.1,
-                y: -10,
+                scale: isLiteMode ? 1.05 : 1.1,
+                y: isLiteMode ? 0 : -10,
               }}
               whileTap={{ scale: 0.95 }}
               className="group relative cursor-hover"
             >
               {/* Card */}
-              <div className="relative glass-strong rounded-2xl p-6 border border-primary-green/20 hover:border-primary-green/50 transition-all duration-300 h-full flex flex-col items-center justify-center">
-                {/* Glow effect on hover */}
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"
-                  style={{
-                    background: `radial-gradient(circle, ${tech.color}40 0%, transparent 70%)`,
-                  }}
-                />
+              <div className={`relative rounded-2xl p-6 border border-primary-green/20 hover:border-primary-green/50 transition-all duration-300 h-full flex flex-col items-center justify-center ${
+                isLiteMode
+                  ? 'bg-primary-gray-light/50'
+                  : 'glass-strong'
+              }`}>
+                {/* Glow effect on hover - Solo en modo completo */}
+                {!isLiteMode && (
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"
+                    style={{
+                      background: `radial-gradient(circle, ${tech.color}40 0%, transparent 70%)`,
+                    }}
+                  />
+                )}
 
                 {/* Icon */}
                 <motion.div
                   className="relative text-6xl mb-4 transition-all duration-300"
                   style={{
                     color: tech.color,
-                    filter: 'drop-shadow(0 0 10px currentColor)',
+                    filter: isLiteMode ? 'none' : 'drop-shadow(0 0 10px currentColor)',
                   }}
-                  whileHover={{
+                  whileHover={isLiteMode ? {} : {
                     rotate: [0, -10, 10, -10, 0],
                     transition: { duration: 0.5 },
                   }}
@@ -219,22 +231,24 @@ const Technologies = () => {
                   {tech.category}
                 </span>
 
-                {/* Shine effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background:
-                      'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%)',
-                    backgroundSize: '200% 200%',
-                  }}
-                  animate={{
-                    backgroundPosition: ['0% 0%', '200% 200%'],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                  }}
-                />
+                {/* Shine effect - Solo en modo completo */}
+                {!isLiteMode && (
+                  <motion.div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background:
+                        'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%)',
+                      backgroundSize: '200% 200%',
+                    }}
+                    animate={{
+                      backgroundPosition: ['0% 0%', '200% 200%'],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                    }}
+                  />
+                )}
               </div>
 
               {/* Tooltip on hover (opcional) */}
@@ -243,7 +257,11 @@ const Technologies = () => {
                 whileHover={{ opacity: 1, y: 0 }}
                 className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 pointer-events-none hidden md:block"
               >
-                <div className="glass-strong px-3 py-1 rounded-lg border border-primary-green/30 whitespace-nowrap">
+                <div className={`px-3 py-1 rounded-lg border border-primary-green/30 whitespace-nowrap ${
+                  isLiteMode
+                    ? 'bg-primary-gray-light/90'
+                    : 'glass-strong'
+                }`}>
                   <p className="text-xs text-primary-white/80">{tech.name}</p>
                 </div>
               </motion.div>
@@ -258,7 +276,11 @@ const Technologies = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mt-16 text-center"
         >
-          <div className="glass-strong rounded-2xl p-8 max-w-3xl mx-auto border border-primary-green/20">
+          <div className={`rounded-2xl p-8 max-w-3xl mx-auto border border-primary-green/20 ${
+            isLiteMode
+              ? 'bg-primary-gray-light/50'
+              : 'glass-strong'
+          }`}>
             <p className="text-lg text-primary-white/70 mb-4">
               Siempre aprendiendo nuevas tecnologías y mejorando mis habilidades
             </p>
