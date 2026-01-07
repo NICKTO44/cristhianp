@@ -8,6 +8,12 @@ import {
   FaHtml5,
   FaNodeJs,
   FaDatabase,
+  FaPuzzlePiece,
+  FaUsers,
+  FaComments,
+  FaBookOpen,
+  FaSyncAlt,
+  FaRegClock,
 } from 'react-icons/fa';
 import {
   SiTailwindcss,
@@ -81,12 +87,12 @@ const Skills = () => {
   ];
 
   const softSkills = [
-    { name: 'Resolución de problemas', icon: '🧩' },
-    { name: 'Trabajo en equipo', icon: '🤝' },
-    { name: 'Comunicación efectiva', icon: '💬' },
-    { name: 'Aprendizaje continuo', icon: '📚' },
-    { name: 'Adaptabilidad', icon: '🔄' },
-    { name: 'Gestión del tiempo', icon: '⏰' },
+    { name: 'Resolución de problemas', icon: <FaPuzzlePiece /> },
+    { name: 'Trabajo en equipo', icon: <FaUsers /> },
+    { name: 'Comunicación efectiva', icon: <FaComments /> },
+    { name: 'Aprendizaje continuo', icon: <FaBookOpen /> },
+    { name: 'Adaptabilidad', icon: <FaSyncAlt /> },
+    { name: 'Gestión del tiempo', icon: <FaRegClock /> },
   ];
 
   return (

@@ -223,26 +223,7 @@ const Footer = () => {
               © {currentYear} Cristhian Quispe. Todos los derechos reservados.
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex items-center gap-2 text-sm text-primary-white/60"
-            >
-              <span>Hecho con</span>
-              <motion.div
-                animate={isLiteMode ? {} : { scale: [1, 1.2, 1] }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              >
-                <FaHeart className="text-primary-green" />
-              </motion.div>
-              <span>y React</span>
-            </motion.div>
+           
 
             <motion.button
               onClick={scrollToTop}
