@@ -17,12 +17,14 @@ import {
   SiMysql,
   SiVite,
 } from 'react-icons/si';
+import { useTranslation } from 'react-i18next';
 import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const Technologies = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const { isLiteMode } = usePerformanceMode();
+  const { t } = useTranslation();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -52,73 +54,73 @@ const Technologies = () => {
       name: 'HTML5',
       icon: <FaHtml5 />,
       color: '#E34F26',
-      category: 'Frontend',
+      category: t('technologies.categories.frontend'),
     },
     {
       name: 'CSS3',
       icon: <FaCss3Alt />,
       color: '#1572B6',
-      category: 'Frontend',
+      category: t('technologies.categories.frontend'),
     },
     {
       name: 'JavaScript',
       icon: <FaJs />,
       color: '#F7DF1E',
-      category: 'Frontend',
+      category: t('technologies.categories.frontend'),
     },
     {
       name: 'React',
       icon: <FaReact />,
       color: '#61DAFB',
-      category: 'Frontend',
+      category: t('technologies.categories.frontend'),
     },
     {
       name: 'Tailwind CSS',
       icon: <SiTailwindcss />,
       color: '#06B6D4',
-      category: 'Frontend',
+      category: t('technologies.categories.frontend'),
     },
     {
       name: 'Vite',
       icon: <SiVite />,
       color: '#646CFF',
-      category: 'Frontend',
+      category: t('technologies.categories.frontend'),
     },
     {
       name: 'Node.js',
       icon: <FaNodeJs />,
       color: '#339933',
-      category: 'Backend',
+      category: t('technologies.categories.backend'),
     },
     {
       name: 'Express',
       icon: <SiExpress />,
       color: '#FFFFFF',
-      category: 'Backend',
+      category: t('technologies.categories.backend'),
     },
     {
       name: 'MySQL',
       icon: <SiMysql />,
       color: '#4479A1',
-      category: 'Database',
+      category: t('technologies.categories.database'),
     },
     {
       name: 'Database',
       icon: <FaDatabase />,
       color: '#22C55E',
-      category: 'Database',
+      category: t('technologies.categories.database'),
     },
     {
       name: 'Git',
       icon: <FaGitAlt />,
       color: '#F05032',
-      category: 'Tools',
+      category: t('technologies.categories.tools'),
     },
     {
       name: 'GitHub',
       icon: <FaGithub />,
       color: '#FFFFFF',
-      category: 'Tools',
+      category: t('technologies.categories.tools'),
     },
   ];
 
@@ -158,17 +160,16 @@ const Technologies = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-2 bg-primary-gray-light border border-primary-green/30 rounded-full text-primary-green text-sm font-medium mb-6">
-            Stack Tecnológico
+            {t('technologies.badge')}
           </span>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-            Tecnologías que{' '}
-            <span className="text-primary-green">domino</span>
+            {t('technologies.title')}{' '}
+            <span className="text-primary-green">{t('technologies.titleHighlight')}</span>
           </h2>
 
           <p className="text-lg text-primary-white/70 max-w-2xl mx-auto">
-            Herramientas y tecnologías modernas con las que trabajo para crear
-            soluciones web robustas y escalables
+            {t('technologies.description')}
           </p>
         </motion.div>
 
@@ -282,20 +283,20 @@ const Technologies = () => {
               : 'glass-strong'
           }`}>
             <p className="text-lg text-primary-white/70 mb-4">
-              Siempre aprendiendo nuevas tecnologías y mejorando mis habilidades
+              {t('technologies.additionalInfo')}
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <span className="px-4 py-2 bg-primary-gray-light rounded-full text-sm text-primary-green border border-primary-green/30">
-                REST APIs
+                {t('technologies.tags.restAPIs')}
               </span>
               <span className="px-4 py-2 bg-primary-gray-light rounded-full text-sm text-primary-green border border-primary-green/30">
-                Responsive Design
+                {t('technologies.tags.responsive')}
               </span>
               <span className="px-4 py-2 bg-primary-gray-light rounded-full text-sm text-primary-green border border-primary-green/30">
-                Clean Code
+                {t('technologies.tags.cleanCode')}
               </span>
               <span className="px-4 py-2 bg-primary-gray-light rounded-full text-sm text-primary-green border border-primary-green/30">
-                Agile
+                {t('technologies.tags.agile')}
               </span>
             </div>
           </div>

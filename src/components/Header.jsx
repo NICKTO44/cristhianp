@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiMenu, HiX } from 'react-icons/hi';
+import { useTranslation } from 'react-i18next';
 import PerformanceToggle from './PerformanceToggle';
+import LanguageToggle from './LanguageToggle';
 import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const Header = () => {
@@ -10,6 +12,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
   const { isLiteMode } = usePerformanceMode();
+  const { t } = useTranslation();
 
   // Detectar scroll (glassmorphism)
   useEffect(() => {
@@ -49,11 +52,11 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { name: 'Inicio', id: 'inicio' },
-    { name: 'Sobre mí', id: 'sobre-mi' },
-    { name: 'Proyectos', id: 'proyectos' },
-    { name: 'Habilidades', id: 'habilidades' },
-    { name: 'Contacto', id: 'contacto' },
+    { name: t('nav.home'), id: 'inicio' },
+    { name: t('nav.about'), id: 'sobre-mi' },
+    { name: t('nav.projects'), id: 'proyectos' },
+    { name: t('nav.skills'), id: 'habilidades' },
+    { name: t('nav.contact'), id: 'contacto' },
   ];
 
   const handleNavClick = (id) => {
@@ -136,44 +139,47 @@ const Header = () => {
             ))}
           </div>
 
-          {/* Social + Performance Toggle Desktop */}
+          {/* Performance Toggle + Language Toggle + Social Desktop */}
           <div className="hidden md:flex items-center space-x-4">
             <PerformanceToggle />
+            <LanguageToggle />
 
-            <motion.a
+            <a
               href="https://github.com/NICKTO44"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.9 }}
               className="text-primary-white hover:text-primary-green transition-colors cursor-hover"
               aria-label="GitHub"
             >
               <FaGithub size={22} />
-            </motion.a>
+            </a>
 
-            <motion.a
+            <a
               href="https://linkedin.com/in/tuusuario"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              whileTap={{ scale: 0.9 }}
               className="text-primary-white hover:text-primary-green transition-colors cursor-hover"
               aria-label="LinkedIn"
             >
               <FaLinkedin size={22} />
-            </motion.a>
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-primary-white hover:text-primary-green transition-colors cursor-hover"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
-          </motion.button>
+          {/* Performance Toggle + Mobile Menu Button */}
+          <div className="md:hidden flex items-center gap-3">
+            {/* Performance Toggle Mobile - Siempre visible */}
+            <PerformanceToggle />
+            
+            {/* Mobile Menu Button */}
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-primary-white hover:text-primary-green transition-colors cursor-hover"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
+            </motion.button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -210,10 +216,12 @@ const Header = () => {
                   </motion.a>
                 ))}
 
+                {/* Language Toggle Mobile - Dentro del menú */}
                 <div className="pt-4 border-t border-primary-gray-light">
-                  <PerformanceToggle />
+                  <LanguageToggle />
                 </div>
 
+                {/* Social Icons Mobile */}
                 <div className="flex items-center space-x-6 pt-4 border-t border-primary-gray-light">
                   <motion.a
                     href="https://github.com/NICKTO44"

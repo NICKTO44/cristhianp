@@ -21,12 +21,14 @@ import {
   SiExpress,
   SiMysql,
 } from 'react-icons/si';
+import { useTranslation } from 'react-i18next';
 import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const Skills = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const { isLiteMode } = usePerformanceMode();
+  const { t } = useTranslation();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -52,9 +54,8 @@ const Skills = () => {
 
   const skillCategories = [
     {
-      title: 'Frontend Development',
-      
-      description: 'Creación de interfaces modernas y responsive',
+      title: t('skills.categories.frontend.title'),
+      description: t('skills.categories.frontend.description'),
       skills: [
         { name: 'React', icon: <FaReact />, level: 85, color: '#61DAFB' },
         { name: 'JavaScript', icon: <FaJs />, level: 80, color: '#F7DF1E' },
@@ -65,9 +66,8 @@ const Skills = () => {
       ],
     },
     {
-      title: 'Backend Development',
-      
-      description: 'Desarrollo de APIs y lógica del servidor',
+      title: t('skills.categories.backend.title'),
+      description: t('skills.categories.backend.description'),
       skills: [
         { name: 'Node.js', icon: <FaNodeJs />, level: 80, color: '#339933' },
         { name: 'Express', icon: <SiExpress />, level: 75, color: '#FFFFFF' },
@@ -75,9 +75,8 @@ const Skills = () => {
       ],
     },
     {
-      title: 'Database & Tools',
-     
-      description: 'Gestión de bases de datos y herramientas',
+      title: t('skills.categories.database.title'),
+      description: t('skills.categories.database.description'),
       skills: [
         { name: 'MySQL', icon: <SiMysql />, level: 80, color: '#4479A1' },
         { name: 'Git', icon: <FaDatabase />, level: 85, color: '#F05032' },
@@ -87,12 +86,12 @@ const Skills = () => {
   ];
 
   const softSkills = [
-    { name: 'Resolución de problemas', icon: <FaPuzzlePiece /> },
-    { name: 'Trabajo en equipo', icon: <FaUsers /> },
-    { name: 'Comunicación efectiva', icon: <FaComments /> },
-    { name: 'Aprendizaje continuo', icon: <FaBookOpen /> },
-    { name: 'Adaptabilidad', icon: <FaSyncAlt /> },
-    { name: 'Gestión del tiempo', icon: <FaRegClock /> },
+    { name: t('skills.softSkills.problemSolving'), icon: <FaPuzzlePiece /> },
+    { name: t('skills.softSkills.teamwork'), icon: <FaUsers /> },
+    { name: t('skills.softSkills.communication'), icon: <FaComments /> },
+    { name: t('skills.softSkills.learning'), icon: <FaBookOpen /> },
+    { name: t('skills.softSkills.adaptability'), icon: <FaSyncAlt /> },
+    { name: t('skills.softSkills.timeManagement'), icon: <FaRegClock /> },
   ];
 
   return (
@@ -128,16 +127,16 @@ const Skills = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-2 bg-primary-gray-light border border-primary-green/30 rounded-full text-primary-green text-sm font-medium mb-6">
-            Habilidades
+            {t('skills.badge')}
           </span>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-            Mi stack{' '}
-            <span className="text-primary-green">tecnológico</span>
+            {t('skills.title')}{' '}
+            <span className="text-primary-green">{t('skills.titleHighlight')}</span>
           </h2>
 
           <p className="text-lg text-primary-white/70 max-w-2xl mx-auto">
-            Conocimientos técnicos y habilidades que aplico en cada proyecto
+            {t('skills.description')}
           </p>
         </motion.div>
 
@@ -161,13 +160,6 @@ const Skills = () => {
             >
               {/* Category Header */}
               <div className="text-center mb-8">
-                <motion.div
-                  whileHover={isLiteMode ? {} : { rotate: 360, scale: 1.2 }}
-                  transition={{ duration: 0.6 }}
-                  className="text-5xl mb-4 inline-block"
-                >
-                  {category.icon}
-                </motion.div>
                 <h3 className="text-2xl font-display font-bold text-primary-white group-hover:text-primary-green transition-colors mb-2">
                   {category.title}
                 </h3>
@@ -235,11 +227,11 @@ const Skills = () => {
         >
           <div className="text-center mb-8">
             <h3 className="text-3xl font-display font-bold text-primary-white mb-2">
-              Habilidades{' '}
-              <span className="text-primary-green">Blandas</span>
+              {t('skills.softSkills.title')}{' '}
+              <span className="text-primary-green">{t('skills.softSkills.titleHighlight')}</span>
             </h3>
             <p className="text-primary-white/60">
-              Competencias que complementan mi desarrollo profesional
+              {t('skills.softSkills.description')}
             </p>
           </div>
 
@@ -256,7 +248,7 @@ const Skills = () => {
                 <motion.div
                   whileHover={isLiteMode ? {} : { rotate: 360 }}
                   transition={{ duration: 0.5 }}
-                  className="text-4xl mb-3"
+                  className="text-4xl mb-3 text-primary-green"
                 >
                   {skill.icon}
                 </motion.div>
@@ -286,7 +278,7 @@ const Skills = () => {
               className="w-3 h-3 bg-primary-green rounded-full"
             />
             <span className="text-sm text-primary-white/80">
-              Siempre aprendiendo y mejorando mis habilidades
+              {t('skills.learning')}
             </span>
           </div>
         </motion.div>

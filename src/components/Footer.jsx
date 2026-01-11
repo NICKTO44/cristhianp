@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaWhatsapp, FaHeart, FaArrowUp } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { isLiteMode } = usePerformanceMode();
+  const { t } = useTranslation();
 
   const socialLinks = [
     {
@@ -28,11 +30,11 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { name: 'Inicio', id: 'inicio' },
-    { name: 'Sobre mí', id: 'sobre-mi' },
-    { name: 'Proyectos', id: 'proyectos' },
-    { name: 'Habilidades', id: 'habilidades' },
-    { name: 'Contacto', id: 'contacto' },
+    { name: t('footer.navigation'), id: 'inicio' },
+    { name: t('nav.about'), id: 'sobre-mi' },
+    { name: t('nav.projects'), id: 'proyectos' },
+    { name: t('nav.skills'), id: 'habilidades' },
+    { name: t('nav.contact'), id: 'contacto' },
   ];
 
   const handleScroll = (id) => {
@@ -99,8 +101,7 @@ const Footer = () => {
                 </div>
 
                 <p className="text-primary-white/70 mb-6 max-w-md">
-                  Desarrollador Web especializado en crear aplicaciones modernas y funcionales.
-                  Apasionado por el código limpio y las mejores prácticas.
+                  {t('footer.description')}
                 </p>
 
                 <div className="flex gap-4">
@@ -134,7 +135,7 @@ const Footer = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h3 className="text-lg font-display font-bold text-primary-white mb-4">
-                Navegación
+                {t('footer.navigation')}
               </h3>
               <ul className="space-y-3">
                 {quickLinks.map((link, index) => (
@@ -163,7 +164,7 @@ const Footer = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <h3 className="text-lg font-display font-bold text-primary-white mb-4">
-                Contacto
+                {t('footer.contact')}
               </h3>
               <ul className="space-y-3">
                 <li>
@@ -204,7 +205,7 @@ const Footer = () => {
                   className="w-2 h-2 bg-primary-green rounded-full"
                 />
                 <span className="text-xs text-primary-green font-medium">
-                  Disponible para colaborar
+                  {t('footer.available')}
                 </span>
               </motion.div>
             </motion.div>
@@ -220,10 +221,8 @@ const Footer = () => {
               transition={{ duration: 0.6 }}
               className="text-sm text-primary-white/60 text-center md:text-left"
             >
-              © {currentYear} Cristhian Quispe. Todos los derechos reservados.
+              © {currentYear} Cristhian Quispe. {t('footer.rights')}.
             </motion.p>
-
-           
 
             <motion.button
               onClick={scrollToTop}
@@ -232,7 +231,7 @@ const Footer = () => {
               className={`w-10 h-10 flex items-center justify-center rounded-lg border border-primary-green/30 hover:border-primary-green/50 transition-all cursor-hover group ${
                 isLiteMode ? 'bg-primary-gray' : 'glass'
               }`}
-              aria-label="Volver arriba"
+              aria-label={t('footer.backToTop')}
             >
               <FaArrowUp className="text-primary-white group-hover:text-primary-green transition-colors" />
             </motion.button>

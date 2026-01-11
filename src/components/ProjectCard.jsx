@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const ProjectCard = ({ project, index }) => {
   const { isLiteMode } = usePerformanceMode();
+  const { t } = useTranslation();
 
   return (
     <motion.div
@@ -53,7 +55,7 @@ const ProjectCard = ({ project, index }) => {
               transition={{ delay: 0.5, type: 'spring' }}
               className="absolute top-4 right-4 px-3 py-1 bg-primary-green text-primary-black text-xs font-bold rounded-full"
             >
-              Destacado
+              {t('projects.featured')}
             </motion.div>
           )}
 
@@ -72,7 +74,7 @@ const ProjectCard = ({ project, index }) => {
               className="flex items-center gap-2 px-5 py-3 bg-primary-green text-primary-black rounded-lg font-semibold hover:bg-green-400 transition-colors"
             >
               <FaExternalLinkAlt size={16} />
-              Ver Demo
+              {t('projects.btnDemo')}
             </motion.a>
 
             <motion.a
@@ -84,7 +86,7 @@ const ProjectCard = ({ project, index }) => {
               className="flex items-center gap-2 px-5 py-3 bg-primary-white text-primary-black rounded-lg font-semibold hover:bg-gray-200 transition-colors"
             >
               <FaGithub size={16} />
-              Código
+              {t('projects.btnCode')}
             </motion.a>
           </motion.div>
         </div>
@@ -122,7 +124,7 @@ const ProjectCard = ({ project, index }) => {
               className="flex items-center gap-2 text-sm text-primary-white/70 hover:text-primary-green transition-colors cursor-hover"
             >
               <FaExternalLinkAlt size={14} />
-              Ver demo
+              {t('projects.viewDemo')}
             </a>
 
             <a
@@ -132,7 +134,7 @@ const ProjectCard = ({ project, index }) => {
               className="flex items-center gap-2 text-sm text-primary-white/70 hover:text-primary-green transition-colors cursor-hover"
             >
               <FaGithub size={14} />
-              GitHub
+              {t('projects.github')}
             </a>
           </div>
         </div>

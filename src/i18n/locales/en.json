@@ -1,0 +1,183 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "performance": {
+    "lite": "Lite",
+    "full": "Full",
+    "toggleHint": "Switch to"
+  },
+  "hero": {
+    "available": "Available for projects",
+    "greeting": "Hi, I'm",
+    "name": "Cristhian Quispe",
+    "roles": {
+      "webDev": "Web Developer",
+      "frontend": "Frontend Developer",
+      "backend": "Backend Developer",
+      "creator": "Experience Creator"
+    },
+    "description": "I build modern, optimized, and functional web applications using technologies like",
+    "and": "and more",
+    "btnProjects": "View Projects",
+    "btnCV": "Download CV",
+    "stats": {
+      "years": "Years studying",
+      "projects": "Projects",
+      "technologies": "Technologies"
+    }
+  },
+  "about": {
+    "badge": "About me",
+    "title": "Passionate developer for",
+    "titleHighlight": "creating web experiences",
+    "paragraph1": "I'm a",
+    "paragraph1Highlight": "penultimate semester",
+    "paragraph1End": "student in the",
+    "paragraph1Career": "Information Systems Development",
+    "paragraph1End2": "program.",
+    "paragraph2": "I have experience creating",
+    "paragraph2Highlight": "personal web projects",
+    "paragraph2End": "and complete applications. I specialize in",
+    "paragraph2Frontend": "Frontend",
+    "paragraph2And": "and",
+    "paragraph2Backend": "Backend",
+    "paragraph2End2": "development, with a focus on creating modern, scalable, and user-centered solutions.",
+    "paragraph3": "I'm passionate about",
+    "paragraph3Highlight": "modern web development",
+    "paragraph3End": "and I'm ready to start my professional experience, bringing creativity, dedication, and updated technical knowledge.",
+    "btnContact": "Contact me",
+    "available": "Available to collaborate",
+    "features": {
+      "student": {
+        "title": "Student",
+        "description": "Penultimate semester in Information Systems Development"
+      },
+      "learning": {
+        "title": "Continuous learning",
+        "description": "Always exploring new technologies and methodologies"
+      },
+      "modern": {
+        "title": "Modern approach",
+        "description": "Optimized and scalable web applications"
+      },
+      "creative": {
+        "title": "Creative solutions",
+        "description": "Solving problems with clean and efficient code"
+      }
+    }
+  },
+  "projects": {
+    "badge": "Portfolio",
+    "title": "Featured",
+    "titleHighlight": "projects",
+    "description": "Explore some of the projects I've worked on, applying best practices and modern technologies",
+    "filterAll": "All",
+    "filterFeatured": "Featured",
+    "featured": "Featured",
+    "btnDemo": "View Demo",
+    "btnCode": "Code",
+    "viewDemo": "View demo",
+    "github": "GitHub",
+    "moreProjects": "Want to see more projects?",
+    "btnMoreGithub": "View more on GitHub"
+  },
+  "skills": {
+    "badge": "Skills",
+    "title": "My",
+    "titleHighlight": "tech stack",
+    "description": "Technical knowledge and skills I apply in each project",
+    "categories": {
+      "frontend": {
+        "title": "Frontend Development",
+        "description": "Creating modern and responsive interfaces"
+      },
+      "backend": {
+        "title": "Backend Development",
+        "description": "API development and server logic"
+      },
+      "database": {
+        "title": "Database & Tools",
+        "description": "Database management and tools"
+      }
+    },
+    "softSkills": {
+      "title": "Soft",
+      "titleHighlight": "Skills",
+      "description": "Competencies that complement my professional development",
+      "problemSolving": "Problem solving",
+      "teamwork": "Teamwork",
+      "communication": "Effective communication",
+      "learning": "Continuous learning",
+      "adaptability": "Adaptability",
+      "timeManagement": "Time management"
+    },
+    "learning": "Always learning and improving my skills"
+  },
+  "technologies": {
+    "badge": "Tech Stack",
+    "title": "Technologies I",
+    "titleHighlight": "master",
+    "description": "Modern tools and technologies I work with to create robust and scalable web solutions",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Database",
+      "tools": "Tools"
+    },
+    "additionalInfo": "Always learning new technologies and improving my skills",
+    "tags": {
+      "restAPIs": "REST APIs",
+      "responsive": "Responsive Design",
+      "cleanCode": "Clean Code",
+      "agile": "Agile"
+    }
+  },
+  "contact": {
+    "badge": "Contact",
+    "title": "Let's work",
+    "titleHighlight": "together",
+    "description": "I'm available for internships, freelance projects, or junior positions. Let's talk about your next project!",
+    "info": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "location": "Location"
+    },
+    "social": "Follow me on social media",
+    "available": "Available to work",
+    "availableDescription": "Currently looking for opportunities for internships and freelance projects",
+    "form": {
+      "nameLabel": "Full name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Tell me about your project...",
+      "btnSend": "Send message",
+      "sending": "Sending...",
+      "successMessage": "Message sent successfully! I'll respond soon.",
+      "errorMessage": "Error sending message. Please try again.",
+      "errors": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email",
+        "messageRequired": "Message is required",
+        "messageMin": "Message must be at least 10 characters"
+      }
+    }
+  },
+  "footer": {
+    "description": "Web Developer specialized in creating modern and functional applications. Passionate about clean code and best practices.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "available": "Available to collaborate",
+    "rights": "All rights reserved",
+    "madeWith": "Made with",
+    "and": "and",
+    "backToTop": "Back to top"
+  }
+}

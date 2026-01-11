@@ -9,6 +9,7 @@ import {
   FaMapMarkerAlt,
   FaPaperPlane,
 } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import emailjs from 'emailjs-com';
 import usePerformanceMode from '../hooks/usePerformanceMode';
 
@@ -17,6 +18,7 @@ const Contact = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const formRef = useRef();
   const { isLiteMode } = usePerformanceMode();
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -57,19 +59,19 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: <FaEnvelope />,
-      title: 'Email',
+      title: t('contact.info.email'),
       value: 'cristhianquispechallco44@gmail.com',
-      link: 'mailto:cristhian.quispe@ejemplo.com',
+      link: 'mailto:cristhianquispechallco44@gmail.com',
     },
     {
       icon: <FaWhatsapp />,
-      title: 'WhatsApp',
+      title: t('contact.info.whatsapp'),
       value: '+51 927 391 918',
       link: 'https://wa.me/51927391918',
     },
     {
       icon: <FaMapMarkerAlt />,
-      title: 'Ubicación',
+      title: t('contact.info.location'),
       value: 'Cusco, Perú',
       link: null,
     },
@@ -100,19 +102,19 @@ const Contact = () => {
     const newErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'El nombre es requerido';
+      newErrors.name = t('contact.form.errors.nameRequired');
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'El email es requerido';
+      newErrors.email = t('contact.form.errors.emailRequired');
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email inválido';
+      newErrors.email = t('contact.form.errors.emailInvalid');
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'El mensaje es requerido';
+      newErrors.message = t('contact.form.errors.messageRequired');
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
+      newErrors.message = t('contact.form.errors.messageMin');
     }
 
     setErrors(newErrors);
@@ -198,16 +200,15 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-2 bg-primary-gray-light border border-primary-green/30 rounded-full text-primary-green text-sm font-medium mb-6">
-            Contacto
+            {t('contact.badge')}
           </span>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-            Trabajemos <span className="text-primary-green">juntos</span>
+            {t('contact.title')} <span className="text-primary-green">{t('contact.titleHighlight')}</span>
           </h2>
 
           <p className="text-lg text-primary-white/70 max-w-2xl mx-auto">
-            Estoy disponible para prácticas pre-profesionales, proyectos freelance
-            o posiciones junior. ¡Conversemos sobre tu próximo proyecto!
+            {t('contact.description')}
           </p>
         </motion.div>
 
@@ -275,7 +276,7 @@ const Contact = () => {
                 : 'glass-strong'
             }`}>
               <h3 className="text-xl font-display font-bold text-primary-white mb-4">
-                Sígueme en redes
+                {t('contact.social')}
               </h3>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
@@ -317,12 +318,11 @@ const Contact = () => {
                   className="w-3 h-3 bg-primary-green rounded-full"
                 />
                 <span className="text-primary-green font-bold">
-                  Disponible para trabajar
+                  {t('contact.available')}
                 </span>
               </div>
               <p className="text-sm text-primary-white/70">
-                Actualmente buscando oportunidades para prácticas pre-profesionales
-                y proyectos freelance
+                {t('contact.availableDescription')}
               </p>
             </motion.div>
           </motion.div>
@@ -344,7 +344,7 @@ const Contact = () => {
                   htmlFor="name"
                   className="block text-sm font-medium text-primary-white mb-2"
                 >
-                  Nombre completo
+                  {t('contact.form.nameLabel')}
                 </label>
                 <input
                   type="text"
@@ -355,7 +355,7 @@ const Contact = () => {
                   className={`w-full px-4 py-3 bg-primary-gray-light border ${
                     errors.name ? 'border-red-500' : 'border-primary-green/30'
                   } rounded-xl text-primary-white placeholder-primary-white/40 focus:outline-none focus:border-primary-green transition-colors`}
-                  placeholder="Tu nombre"
+                  placeholder={t('contact.form.namePlaceholder')}
                 />
                 {errors.name && (
                   <p className="mt-1 text-sm text-red-500">{errors.name}</p>
@@ -368,7 +368,7 @@ const Contact = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-primary-white mb-2"
                 >
-                  Email
+                  {t('contact.form.emailLabel')}
                 </label>
                 <input
                   type="email"
@@ -379,7 +379,7 @@ const Contact = () => {
                   className={`w-full px-4 py-3 bg-primary-gray-light border ${
                     errors.email ? 'border-red-500' : 'border-primary-green/30'
                   } rounded-xl text-primary-white placeholder-primary-white/40 focus:outline-none focus:border-primary-green transition-colors`}
-                  placeholder="tu@email.com"
+                  placeholder={t('contact.form.emailPlaceholder')}
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-500">{errors.email}</p>
@@ -392,7 +392,7 @@ const Contact = () => {
                   htmlFor="message"
                   className="block text-sm font-medium text-primary-white mb-2"
                 >
-                  Mensaje
+                  {t('contact.form.messageLabel')}
                 </label>
                 <textarea
                   id="message"
@@ -403,7 +403,7 @@ const Contact = () => {
                   className={`w-full px-4 py-3 bg-primary-gray-light border ${
                     errors.message ? 'border-red-500' : 'border-primary-green/30'
                   } rounded-xl text-primary-white placeholder-primary-white/40 focus:outline-none focus:border-primary-green transition-colors resize-none`}
-                  placeholder="Cuéntame sobre tu proyecto..."
+                  placeholder={t('contact.form.messagePlaceholder')}
                 />
                 {errors.message && (
                   <p className="mt-1 text-sm text-red-500">{errors.message}</p>
@@ -427,12 +427,12 @@ const Contact = () => {
                       transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                       className="w-5 h-5 border-2 border-primary-black border-t-transparent rounded-full"
                     />
-                    Enviando...
+                    {t('contact.form.sending')}
                   </>
                 ) : (
                   <>
                     <FaPaperPlane />
-                    Enviar mensaje
+                    {t('contact.form.btnSend')}
                   </>
                 )}
               </motion.button>
@@ -444,7 +444,7 @@ const Contact = () => {
                   className="p-4 bg-primary-green/20 border border-primary-green rounded-xl"
                 >
                   <p className="text-primary-green text-center font-medium">
-                    ¡Mensaje enviado con éxito! Te responderé pronto.
+                    {t('contact.form.successMessage')}
                   </p>
                 </motion.div>
               )}
@@ -456,7 +456,7 @@ const Contact = () => {
                   className="p-4 bg-red-500/20 border border-red-500 rounded-xl"
                 >
                   <p className="text-red-500 text-center font-medium">
-                    Error al enviar el mensaje. Por favor, intenta nuevamente.
+                    {t('contact.form.errorMessage')}
                   </p>
                 </motion.div>
               )}

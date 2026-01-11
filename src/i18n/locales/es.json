@@ -1,0 +1,183 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "skills": "Habilidades",
+    "contact": "Contacto"
+  },
+  "performance": {
+    "lite": "Lite",
+    "full": "Completo",
+    "toggleHint": "Cambiar a"
+  },
+  "hero": {
+    "available": "Disponible para proyectos",
+    "greeting": "Hola, soy",
+    "name": "Cristhian Quispe",
+    "roles": {
+      "webDev": "Desarrollador Web",
+      "frontend": "Frontend Developer",
+      "backend": "Backend Developer",
+      "creator": "Creador de Experiencias"
+    },
+    "description": "Construyo aplicaciones web modernas, optimizadas y funcionales utilizando tecnologías como",
+    "and": "y más",
+    "btnProjects": "Ver Proyectos",
+    "btnCV": "Descargar CV",
+    "stats": {
+      "years": "Años estudiando",
+      "projects": "Proyectos",
+      "technologies": "Tecnologías"
+    }
+  },
+  "about": {
+    "badge": "Sobre mí",
+    "title": "Desarrollador apasionado por",
+    "titleHighlight": "crear experiencias web",
+    "paragraph1": "Soy estudiante de",
+    "paragraph1Highlight": "penúltimo semestre",
+    "paragraph1End": "de la carrera",
+    "paragraph1Career": "Desarrollo de Sistemas de Información",
+    "paragraph1End2": ".",
+    "paragraph2": "Tengo experiencia creando",
+    "paragraph2Highlight": "proyectos web personales",
+    "paragraph2End": "y aplicaciones completas. Me especializo en desarrollo",
+    "paragraph2Frontend": "Frontend",
+    "paragraph2And": "y",
+    "paragraph2Backend": "Backend",
+    "paragraph2End2": ", con un enfoque en crear soluciones modernas, escalables y centradas en el usuario.",
+    "paragraph3": "Me apasiona el",
+    "paragraph3Highlight": "desarrollo web moderno",
+    "paragraph3End": "y estoy listo para comenzar mi experiencia profesional, aportando creatividad, dedicación y conocimientos técnicos actualizados.",
+    "btnContact": "Contáctame",
+    "available": "Disponible para colaborar",
+    "features": {
+      "student": {
+        "title": "Estudiante",
+        "description": "Penúltimo semestre en Desarrollo de Sistemas de Información"
+      },
+      "learning": {
+        "title": "Aprendizaje continuo",
+        "description": "Siempre explorando nuevas tecnologías y metodologías"
+      },
+      "modern": {
+        "title": "Enfoque moderno",
+        "description": "Aplicaciones web optimizadas y escalables"
+      },
+      "creative": {
+        "title": "Soluciones creativas",
+        "description": "Resolviendo problemas con código limpio y eficiente"
+      }
+    }
+  },
+  "projects": {
+    "badge": "Portfolio",
+    "title": "Proyectos",
+    "titleHighlight": "destacados",
+    "description": "Explora algunos de los proyectos en los que he trabajado, aplicando las mejores prácticas y tecnologías modernas",
+    "filterAll": "Todos",
+    "filterFeatured": "Destacados",
+    "featured": "Destacado",
+    "btnDemo": "Ver Demo",
+    "btnCode": "Código",
+    "viewDemo": "Ver demo",
+    "github": "GitHub",
+    "moreProjects": "¿Quieres ver más proyectos?",
+    "btnMoreGithub": "Ver más en GitHub"
+  },
+  "skills": {
+    "badge": "Habilidades",
+    "title": "Mi stack",
+    "titleHighlight": "tecnológico",
+    "description": "Conocimientos técnicos y habilidades que aplico en cada proyecto",
+    "categories": {
+      "frontend": {
+        "title": "Frontend Development",
+        "description": "Creación de interfaces modernas y responsive"
+      },
+      "backend": {
+        "title": "Backend Development",
+        "description": "Desarrollo de APIs y lógica del servidor"
+      },
+      "database": {
+        "title": "Database & Tools",
+        "description": "Gestión de bases de datos y herramientas"
+      }
+    },
+    "softSkills": {
+      "title": "Habilidades",
+      "titleHighlight": "Blandas",
+      "description": "Competencias que complementan mi desarrollo profesional",
+      "problemSolving": "Resolución de problemas",
+      "teamwork": "Trabajo en equipo",
+      "communication": "Comunicación efectiva",
+      "learning": "Aprendizaje continuo",
+      "adaptability": "Adaptabilidad",
+      "timeManagement": "Gestión del tiempo"
+    },
+    "learning": "Siempre aprendiendo y mejorando mis habilidades"
+  },
+  "technologies": {
+    "badge": "Stack Tecnológico",
+    "title": "Tecnologías que",
+    "titleHighlight": "domino",
+    "description": "Herramientas y tecnologías modernas con las que trabajo para crear soluciones web robustas y escalables",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Database",
+      "tools": "Tools"
+    },
+    "additionalInfo": "Siempre aprendiendo nuevas tecnologías y mejorando mis habilidades",
+    "tags": {
+      "restAPIs": "REST APIs",
+      "responsive": "Responsive Design",
+      "cleanCode": "Clean Code",
+      "agile": "Agile"
+    }
+  },
+  "contact": {
+    "badge": "Contacto",
+    "title": "Trabajemos",
+    "titleHighlight": "juntos",
+    "description": "Estoy disponible para prácticas pre-profesionales, proyectos freelance o posiciones junior. ¡Conversemos sobre tu próximo proyecto!",
+    "info": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "location": "Ubicación"
+    },
+    "social": "Sígueme en redes",
+    "available": "Disponible para trabajar",
+    "availableDescription": "Actualmente buscando oportunidades para prácticas pre-profesionales y proyectos freelance",
+    "form": {
+      "nameLabel": "Nombre completo",
+      "namePlaceholder": "Tu nombre",
+      "emailLabel": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "messageLabel": "Mensaje",
+      "messagePlaceholder": "Cuéntame sobre tu proyecto...",
+      "btnSend": "Enviar mensaje",
+      "sending": "Enviando...",
+      "successMessage": "¡Mensaje enviado con éxito! Te responderé pronto.",
+      "errorMessage": "Error al enviar el mensaje. Por favor, intenta nuevamente.",
+      "errors": {
+        "nameRequired": "El nombre es requerido",
+        "emailRequired": "El email es requerido",
+        "emailInvalid": "Email inválido",
+        "messageRequired": "El mensaje es requerido",
+        "messageMin": "El mensaje debe tener al menos 10 caracteres"
+      }
+    }
+  },
+  "footer": {
+    "description": "Desarrollador Web especializado en crear aplicaciones modernas y funcionales. Apasionado por el código limpio y las mejores prácticas.",
+    "navigation": "Navegación",
+    "contact": "Contacto",
+    "available": "Disponible para colaborar",
+    "rights": "Todos los derechos reservados",
+    "madeWith": "Hecho con",
+    "and": "y",
+    "backToTop": "Volver arriba"
+  }
+}

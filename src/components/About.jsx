@@ -2,12 +2,14 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaCode, FaRocket, FaLightbulb, FaGraduationCap } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const { isLiteMode } = usePerformanceMode();
+  const { t } = useTranslation();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -34,23 +36,23 @@ const About = () => {
   const features = [
     {
       icon: <FaGraduationCap />,
-      title: 'Estudiante',
-      description: 'Penúltimo semestre en Desarrollo de Sistemas de Información',
+      title: t('about.features.student.title'),
+      description: t('about.features.student.description'),
     },
     {
       icon: <FaCode />,
-      title: 'Aprendizaje continuo',
-      description: 'Siempre explorando nuevas tecnologías y metodologías',
+      title: t('about.features.learning.title'),
+      description: t('about.features.learning.description'),
     },
     {
       icon: <FaRocket />,
-      title: 'Enfoque moderno',
-      description: 'Aplicaciones web optimizadas y escalables',
+      title: t('about.features.modern.title'),
+      description: t('about.features.modern.description'),
     },
     {
       icon: <FaLightbulb />,
-      title: 'Soluciones creativas',
-      description: 'Resolviendo problemas con código limpio y eficiente',
+      title: t('about.features.creative.title'),
+      description: t('about.features.creative.description'),
     },
   ];
 
@@ -116,7 +118,7 @@ const About = () => {
                 <div className="aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-primary-gray to-primary-gray-light">
                   <img
                    src={`${import.meta.env.BASE_URL}assets/images/perfil.jpg`}
-                    alt="Cristhian Quispe - Desarrollador Web"
+                    alt="Cristhian Quispe - Web Developer"
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.style.display = 'none';
@@ -152,7 +154,7 @@ const About = () => {
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 bg-primary-green rounded-full animate-pulse" />
                   <span className="text-sm font-medium text-primary-white">
-                    Disponible para colaborar
+                    {t('about.available')}
                   </span>
                 </div>
               </motion.div>
@@ -163,7 +165,7 @@ const About = () => {
           <div>
             <motion.div variants={itemVariants}>
               <span className="inline-block px-4 py-2 bg-primary-gray-light border border-primary-green/30 rounded-full text-primary-green text-sm font-medium mb-6">
-                Sobre mí
+                {t('about.badge')}
               </span>
             </motion.div>
 
@@ -171,21 +173,21 @@ const About = () => {
               variants={itemVariants}
               className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight"
             >
-              Desarrollador apasionado por{' '}
-              <span className="text-primary-green">crear experiencias web</span>
+              {t('about.title')}{' '}
+              <span className="text-primary-green">{t('about.titleHighlight')}</span>
             </motion.h2>
 
             <motion.div variants={itemVariants} className="space-y-4 mb-8">
               <p className="text-lg text-primary-white/70 leading-relaxed">
-                Soy estudiante de <span className="text-primary-green font-semibold">penúltimo semestre</span> de la carrera <span className="text-primary-white font-medium">Desarrollo de Sistemas de Información</span>. 
+                {t('about.paragraph1')} <span className="text-primary-green font-semibold">{t('about.paragraph1Highlight')}</span> {t('about.paragraph1End')} <span className="text-primary-white font-medium">{t('about.paragraph1Career')}</span>{t('about.paragraph1End2')}
               </p>
 
               <p className="text-lg text-primary-white/70 leading-relaxed">
-                Tengo experiencia creando <span className="text-primary-green font-semibold">proyectos web personales</span> y aplicaciones completas. Me especializo en desarrollo <span className="text-primary-white font-medium">Frontend</span> y <span className="text-primary-white font-medium">Backend</span>, con un enfoque en crear soluciones modernas, escalables y centradas en el usuario.
+                {t('about.paragraph2')} <span className="text-primary-green font-semibold">{t('about.paragraph2Highlight')}</span> {t('about.paragraph2End')} <span className="text-primary-white font-medium">{t('about.paragraph2Frontend')}</span> {t('about.paragraph2And')} <span className="text-primary-white font-medium">{t('about.paragraph2Backend')}</span>{t('about.paragraph2End2')}
               </p>
 
               <p className="text-lg text-primary-white/70 leading-relaxed">
-                Me apasiona el <span className="text-primary-green font-semibold">desarrollo web moderno</span> y estoy listo para comenzar mi experiencia profesional, aportando creatividad, dedicación y conocimientos técnicos actualizados.
+                {t('about.paragraph3')} <span className="text-primary-green font-semibold">{t('about.paragraph3Highlight')}</span> {t('about.paragraph3End')}
               </p>
             </motion.div>
 
@@ -196,7 +198,7 @@ const About = () => {
               onClick={() => handleScroll('contacto')}
               className="btn-primary cursor-hover mb-12"
             >
-              Contáctame
+              {t('about.btnContact')}
             </motion.button>
 
             {/* Features grid */}

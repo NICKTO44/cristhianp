@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaArrowDown } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import usePerformanceMode from '../hooks/usePerformanceMode';
 
 const Hero = () => {
@@ -9,12 +10,13 @@ const Hero = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [roleIndex, setRoleIndex] = useState(0);
   const { isLiteMode } = usePerformanceMode();
+  const { t } = useTranslation();
 
   const roles = [
-    'Desarrollador Web',
-    'Frontend Developer',
-    'Backend Developer',
-    'Creador de Experiencias'
+    t('hero.roles.webDev'),
+    t('hero.roles.frontend'),
+    t('hero.roles.backend'),
+    t('hero.roles.creator')
   ];
 
   // Efecto de typing para los roles
@@ -40,7 +42,7 @@ const Hero = () => {
     }, typingSpeed);
 
     return () => clearTimeout(timeout);
-  }, [currentIndex, isDeleting, roleIndex]);
+  }, [currentIndex, isDeleting, roleIndex, roles]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -130,7 +132,7 @@ const Hero = () => {
           <div className="w-full text-center">
             <motion.div variants={itemVariants} className="mb-6">
               <span className="inline-block px-4 py-2 bg-primary-gray-light border border-primary-green/30 rounded-full text-primary-green text-sm font-medium mb-4">
-                 🟢 Disponible para proyectos
+                 🟢 {t('hero.available')}
               </span>
             </motion.div>
 
@@ -138,9 +140,9 @@ const Hero = () => {
               variants={itemVariants}
               className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight"
             >
-              Hola, soy{' '}
+              {t('hero.greeting')}{' '}
               <span className="text-primary-green inline-block">
-                Cristhian Quispe
+                {t('hero.name')}
               </span>
             </motion.h1>
 
@@ -155,11 +157,10 @@ const Hero = () => {
               variants={itemVariants}
               className="text-lg md:text-xl text-primary-white/70 mb-10 max-w-2xl mx-auto leading-relaxed"
             >
-              Construyo aplicaciones web modernas, optimizadas y funcionales utilizando
-              tecnologías como{' '}
+              {t('hero.description')}{' '}
               <span className="text-primary-green font-semibold">React</span>,{' '}
               <span className="text-primary-green font-semibold">Node.js</span>,{' '}
-              <span className="text-primary-green font-semibold">MySQL</span> y más.
+              <span className="text-primary-green font-semibold">MySQL</span> {t('hero.and')}.
             </motion.p>
 
             {/* Botones */}
@@ -173,7 +174,7 @@ const Hero = () => {
                 onClick={() => handleScroll('proyectos')}
                 className="btn-primary cursor-hover group relative overflow-hidden"
               >
-                <span className="relative z-10">Ver Proyectos</span>
+                <span className="relative z-10">{t('hero.btnProjects')}</span>
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-primary-green to-green-400"
                   initial={{ x: '-100%' }}
@@ -189,7 +190,7 @@ const Hero = () => {
                 whileTap={{ scale: 0.95 }}
                 className="btn-secondary cursor-hover flex items-center justify-center"
               >
-                <span>Descargar CV</span>
+                <span>{t('hero.btnCV')}</span>
                 <svg
                   className="ml-2 w-5 h-5"
                   fill="none"
@@ -213,15 +214,15 @@ const Hero = () => {
             >
               <div className="text-center">
                 <h3 className="text-3xl font-bold text-primary-green">3+</h3>
-                <p className="text-sm text-primary-white/60">Años estudiando</p>
+                <p className="text-sm text-primary-white/60">{t('hero.stats.years')}</p>
               </div>
               <div className="text-center">
                 <h3 className="text-3xl font-bold text-primary-green">10+</h3>
-                <p className="text-sm text-primary-white/60">Proyectos</p>
+                <p className="text-sm text-primary-white/60">{t('hero.stats.projects')}</p>
               </div>
               <div className="text-center">
                 <h3 className="text-3xl font-bold text-primary-green">8+</h3>
-                <p className="text-sm text-primary-white/60">Tecnologías</p>
+                <p className="text-sm text-primary-white/60">{t('hero.stats.technologies')}</p>
               </div>
             </motion.div>
           </div>

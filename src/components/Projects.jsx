@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import ProjectCard from './ProjectCard';
 import { projectsData } from '../data/projects';
 import usePerformanceMode from '../hooks/usePerformanceMode';
@@ -11,6 +12,7 @@ const Projects = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [filter, setFilter] = useState('all');
   const { isLiteMode } = usePerformanceMode();
+  const { t } = useTranslation();
 
   const filteredProjects =
     filter === 'all'
@@ -55,17 +57,16 @@ const Projects = () => {
           className="text-center mb-12"
         >
           <span className="inline-block px-4 py-2 bg-primary-gray-light border border-primary-green/30 rounded-full text-primary-green text-sm font-medium mb-6">
-            Portfolio
+            {t('projects.badge')}
           </span>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-            Proyectos{' '}
-            <span className="text-primary-green">destacados</span>
+            {t('projects.title')}{' '}
+            <span className="text-primary-green">{t('projects.titleHighlight')}</span>
           </h2>
 
           <p className="text-lg text-primary-white/70 max-w-2xl mx-auto mb-10">
-            Explora algunos de los proyectos en los que he trabajado,
-            aplicando las mejores prácticas y tecnologías modernas
+            {t('projects.description')}
           </p>
 
           {/* Filter buttons */}
@@ -85,7 +86,7 @@ const Projects = () => {
                   : 'bg-primary-gray-light text-primary-white border border-primary-green/30 hover:border-primary-green/50'
               }`}
             >
-              Todos
+              {t('projects.filterAll')}
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -97,7 +98,7 @@ const Projects = () => {
                   : 'bg-primary-gray-light text-primary-white border border-primary-green/30 hover:border-primary-green/50'
               }`}
             >
-              Destacados
+              {t('projects.filterFeatured')}
             </motion.button>
           </motion.div>
         </motion.div>
@@ -120,7 +121,7 @@ const Projects = () => {
           className="mt-16 text-center"
         >
           <p className="text-primary-white/70 mb-6">
-            ¿Quieres ver más proyectos?
+            {t('projects.moreProjects')}
           </p>
           <motion.a
             href="https://github.com/tuusuario"
@@ -130,7 +131,7 @@ const Projects = () => {
             whileTap={{ scale: 0.95 }}
             className="btn-secondary cursor-hover inline-flex items-center gap-2"
           >
-            Ver más en GitHub
+            {t('projects.btnMoreGithub')}
             <FaExternalLinkAlt size={16} />
           </motion.a>
         </motion.div>
