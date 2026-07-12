@@ -3,14 +3,30 @@ import { motion } from 'framer-motion';
 import { FaArrowDown } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import usePerformanceMode from '../hooks/usePerformanceMode';
+import RubikCube from './RubikCube';
 
 const Hero = () => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [roleIndex, setRoleIndex] = useState(0);
+  const [cubeSize, setCubeSize] = useState(500);
   const { isLiteMode } = usePerformanceMode();
   const { t } = useTranslation();
+
+  // Tamaño del cubo según viewport: más chico en mobile/tablet, 500 en desktop
+  useEffect(() => {
+    const updateCubeSize = () => {
+      const w = window.innerWidth;
+      if (w < 480) setCubeSize(240);
+      else if (w < 768) setCubeSize(320);
+      else if (w < 1024) setCubeSize(380);
+      else setCubeSize(500);
+    };
+    updateCubeSize();
+    window.addEventListener('resize', updateCubeSize);
+    return () => window.removeEventListener('resize', updateCubeSize);
+  }, []);
 
   const roles = [
     t('hero.roles.webDev'),
@@ -67,6 +83,19 @@ const Hero = () => {
     },
   };
 
+  const cubeVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.9,
+        ease: 'easeOut',
+        delay: 0.4,
+      },
+    },
+  };
+
   const handleScroll = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -81,152 +110,126 @@ const Hero = () => {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-black"
     >
-      {/* Gradientes de fondo - MODO COMPLETO: animados, MODO LITE: estáticos */}
-      {isLiteMode ? (
-        <>
-          {/* Gradientes estáticos sin blur pesado */}
-          <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-primary-green/10 rounded-full" />
-          <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-primary-green/10 rounded-full" />
-        </>
-      ) : (
-        <>
-          {/* Gradientes animados con blur (modo completo) */}
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 90, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            className="absolute top-1/4 -left-1/4 w-96 h-96 bg-primary-green opacity-20 blur-[120px] rounded-full"
-          />
-
-          <motion.div
-            animate={{
-              scale: [1, 1.3, 1],
-              rotate: [0, -90, 0],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-primary-green opacity-20 blur-[120px] rounded-full"
-          />
-        </>
-      )}
-
       <div className="container-custom relative z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col items-center justify-center"
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Contenido de texto */}
-          <div className="w-full text-center">
-            <motion.div variants={itemVariants} className="mb-6">
-              <span className="inline-block px-4 py-2 bg-primary-gray-light border border-primary-green/30 rounded-full text-primary-green text-sm font-medium mb-4">
-                 🟢 {t('hero.available')}
-              </span>
-            </motion.div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col items-center lg:items-start"
+          >
+            <div className="w-full text-center lg:text-left">
+              <motion.div variants={itemVariants} className="mb-6">
+                <span className="inline-block px-4 py-2 bg-primary-gray-light border border-primary-green/30 rounded-full text-primary-green text-sm font-medium mb-4">
+                   🟢 {t('hero.available')}
+                </span>
+              </motion.div>
 
-            <motion.h1
-              variants={itemVariants}
-              className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight"
-            >
-              {t('hero.greeting')}{' '}
-              <span className="text-primary-green inline-block">
-                {t('hero.name')}
-              </span>
-            </motion.h1>
-
-            <motion.div variants={itemVariants} className="mb-8">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-semibold text-primary-white/90 h-12 md:h-14">
-                <span className="text-primary-green">{displayedText}</span>
-                <span className="animate-pulse text-primary-green">|</span>
-              </h2>
-            </motion.div>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-lg md:text-xl text-primary-white/70 mb-10 max-w-2xl mx-auto leading-relaxed"
-            >
-              {t('hero.description')}{' '}
-              <span className="text-primary-green font-semibold">React</span>,{' '}
-              <span className="text-primary-green font-semibold">Node.js</span>,{' '}
-              <span className="text-primary-green font-semibold">MySQL</span> {t('hero.and')}.
-            </motion.p>
-
-            {/* Botones */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => handleScroll('proyectos')}
-                className="btn-primary cursor-hover group relative overflow-hidden"
+              <motion.h1
+                variants={itemVariants}
+                className="text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-display font-bold mb-6 leading-tight"
               >
-                <span className="relative z-10">{t('hero.btnProjects')}</span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary-green to-green-400"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
+                {t('hero.greeting')}{' '}
+                <span className="text-primary-green inline-block">
+                  {t('hero.name')}
+                </span>
+              </motion.h1>
 
-              <motion.a
-                href="/assets/cv/CV-Cristhian-Quispe.pdf"
-                download
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-secondary cursor-hover flex items-center justify-center"
+              <motion.div variants={itemVariants} className="mb-8">
+                <h2 className="text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-display font-semibold text-primary-white/90 h-12 md:h-14">
+                  <span className="text-primary-green">{displayedText}</span>
+                  <span className="animate-pulse text-primary-green">|</span>
+                </h2>
+              </motion.div>
+
+              <motion.p
+                variants={itemVariants}
+                className="text-lg md:text-xl text-primary-white/70 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
               >
-                <span>{t('hero.btnCV')}</span>
-                <svg
-                  className="ml-2 w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                {t('hero.description')}{' '}
+                <span className="text-primary-green font-semibold">React</span>,{' '}
+                <span className="text-primary-green font-semibold">Node.js</span>,{' '}
+                <span className="text-primary-green font-semibold">MySQL</span> {t('hero.and')}.
+              </motion.p>
+
+              {/* Botones */}
+              <motion.div
+                variants={itemVariants}
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              >
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => handleScroll('proyectos')}
+                  className="btn-primary cursor-hover group relative overflow-hidden"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  <span className="relative z-10">{t('hero.btnProjects')}</span>
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-primary-green to-green-400"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: 0 }}
+                    transition={{ duration: 0.3 }}
                   />
-                </svg>
-              </motion.a>
-            </motion.div>
+                </motion.button>
 
-            {/* Stats */}
-            <motion.div
-              variants={itemVariants}
-              className="mt-12 grid grid-cols-3 gap-6 max-w-md mx-auto"
-            >
-              <div className="text-center">
-                <h3 className="text-3xl font-bold text-primary-green">3+</h3>
-                <p className="text-sm text-primary-white/60">{t('hero.stats.years')}</p>
-              </div>
-              <div className="text-center">
-                <h3 className="text-3xl font-bold text-primary-green">10+</h3>
-                <p className="text-sm text-primary-white/60">{t('hero.stats.projects')}</p>
-              </div>
-              <div className="text-center">
-                <h3 className="text-3xl font-bold text-primary-green">8+</h3>
-                <p className="text-sm text-primary-white/60">{t('hero.stats.technologies')}</p>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
+                <motion.a
+                  href="/assets/cv/CV-Cristhian-Quispe.pdf"
+                  download
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-secondary cursor-hover flex items-center justify-center"
+                >
+                  <span>{t('hero.btnCV')}</span>
+                  <svg
+                    className="ml-2 w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                </motion.a>
+              </motion.div>
+
+              {/* Stats */}
+              <motion.div
+                variants={itemVariants}
+                className="mt-12 grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0"
+              >
+                <div className="text-center lg:text-left">
+                  <h3 className="text-3xl font-bold text-primary-green">3+</h3>
+                  <p className="text-sm text-primary-white/60">{t('hero.stats.years')}</p>
+                </div>
+                <div className="text-center lg:text-left">
+                  <h3 className="text-3xl font-bold text-primary-green">10+</h3>
+                  <p className="text-sm text-primary-white/60">{t('hero.stats.projects')}</p>
+                </div>
+                <div className="text-center lg:text-left">
+                  <h3 className="text-3xl font-bold text-primary-green">8+</h3>
+                  <p className="text-sm text-primary-white/60">{t('hero.stats.technologies')}</p>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Cubo de Rubik — tal cual el proyecto original, fondo negro, solo desktop */}
+          <motion.div
+            variants={cubeVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex items-center justify-center mt-10 lg:mt-0"
+          >
+            {!isLiteMode && <RubikCube width={cubeSize} height={cubeSize} />}
+          </motion.div>
+        </div>
 
         {/* Scroll indicator */}
         <motion.div
